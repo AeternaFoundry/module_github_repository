@@ -66,24 +66,6 @@ EOT
 
   type = map(object({
     name                                    = string
-    has_wiki                                = optional(bool)
-    homepage_url                            = optional(string)
-    ignore_vulnerability_alerts_during_read = optional(bool)
-    is_template                             = optional(bool)
-    license_template                        = optional(string)
-    merge_commit_message                    = optional(string)
-    has_projects                            = optional(bool)
-    merge_commit_title                      = optional(string)
-    source_owner                            = optional(string)
-    source_repo                             = optional(string)
-    squash_merge_commit_message             = optional(string)
-    squash_merge_commit_title               = optional(string)
-    topics                                  = optional(set(string))
-    visibility                              = optional(string)
-    private                                 = optional(bool)
-    has_issues                              = optional(bool)
-    has_downloads                           = optional(bool)
-    has_discussions                         = optional(bool)
     allow_auto_merge                        = optional(bool)
     allow_forking                           = optional(bool)
     allow_merge_commit                      = optional(bool)
@@ -99,6 +81,24 @@ EOT
     etag                                    = optional(string)
     fork                                    = optional(string)
     gitignore_template                      = optional(string)
+    has_discussions                         = optional(bool)
+    has_downloads                           = optional(bool)
+    has_issues                              = optional(bool)
+    has_projects                            = optional(bool)
+    has_wiki                                = optional(bool)
+    homepage_url                            = optional(string)
+    ignore_vulnerability_alerts_during_read = optional(bool)
+    is_template                             = optional(bool)
+    license_template                        = optional(string)
+    merge_commit_message                    = optional(string)
+    merge_commit_title                      = optional(string)
+    private                                 = optional(bool)
+    source_owner                            = optional(string)
+    source_repo                             = optional(string)
+    squash_merge_commit_message             = optional(string)
+    squash_merge_commit_title               = optional(string)
+    topics                                  = optional(set(string))
+    visibility                              = optional(string)
     vulnerability_alerts                    = optional(bool)
     web_commit_signoff_required             = optional(bool)
     pages = optional(object({
@@ -149,7 +149,7 @@ EOT
         v.visibility == null || (contains(["public", "private", "internal"], v.visibility))
       )
     ])
-    error_message = "must be one of: public, private, internal"
+    error_message = "must be one of: \"public\", \"private\", \"internal\""
   }
   validation {
     condition = alltrue([
@@ -157,7 +157,7 @@ EOT
         v.security_and_analysis == null || (v.security_and_analysis.advanced_security == null || (contains(["enabled", "disabled"], v.security_and_analysis.advanced_security.status)))
       )
     ])
-    error_message = "must be one of: enabled, disabled"
+    error_message = "must be one of: \"enabled\", \"disabled\""
   }
   validation {
     condition = alltrue([
@@ -165,7 +165,7 @@ EOT
         v.security_and_analysis == null || (v.security_and_analysis.code_security == null || (contains(["enabled", "disabled"], v.security_and_analysis.code_security.status)))
       )
     ])
-    error_message = "must be one of: enabled, disabled"
+    error_message = "must be one of: \"enabled\", \"disabled\""
   }
   validation {
     condition = alltrue([
@@ -173,7 +173,7 @@ EOT
         v.security_and_analysis == null || (v.security_and_analysis.secret_scanning == null || (contains(["enabled", "disabled"], v.security_and_analysis.secret_scanning.status)))
       )
     ])
-    error_message = "must be one of: enabled, disabled"
+    error_message = "must be one of: \"enabled\", \"disabled\""
   }
   validation {
     condition = alltrue([
@@ -181,7 +181,7 @@ EOT
         v.security_and_analysis == null || (v.security_and_analysis.secret_scanning_push_protection == null || (contains(["enabled", "disabled"], v.security_and_analysis.secret_scanning_push_protection.status)))
       )
     ])
-    error_message = "must be one of: enabled, disabled"
+    error_message = "must be one of: \"enabled\", \"disabled\""
   }
   validation {
     condition = alltrue([
@@ -189,7 +189,7 @@ EOT
         v.security_and_analysis == null || (v.security_and_analysis.secret_scanning_ai_detection == null || (contains(["enabled", "disabled"], v.security_and_analysis.secret_scanning_ai_detection.status)))
       )
     ])
-    error_message = "must be one of: enabled, disabled"
+    error_message = "must be one of: \"enabled\", \"disabled\""
   }
   validation {
     condition = alltrue([
@@ -197,7 +197,7 @@ EOT
         v.security_and_analysis == null || (v.security_and_analysis.secret_scanning_non_provider_patterns == null || (contains(["enabled", "disabled"], v.security_and_analysis.secret_scanning_non_provider_patterns.status)))
       )
     ])
-    error_message = "must be one of: enabled, disabled"
+    error_message = "must be one of: \"enabled\", \"disabled\""
   }
   validation {
     condition = alltrue([
